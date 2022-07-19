@@ -16,11 +16,20 @@ type YariDom = {
   elm: HTMLImageElement;
   posY: number;
 };
+/**
+ * グローバル変数
+ * @param ell 楕円形のデータ
+ * @param ratio 親指と人差し指のそれぞれの関節の離れ距離に応じた比率
+ * @param distance3
+ * @param isCreate falseの間は複数の槍画像のDOMが生成されないようにするためsetTimeoutの間はフラグを立てておく真偽値
+ * @param ratio 親指と人差し指のそれぞれの関節の離れ距離に応じた比率
+ */
 let ell: CustomEll;
 let ratio: number;
 let distance3: number;
 let yariDoms: YariDom[] = [];
-let isCreate = true;
+let isCreate = false;
+
 /**
  * cnavasに描画する
  * @param ctx canvas context
@@ -35,6 +44,7 @@ export const drawCanvas = (ctx: CanvasRenderingContext2D, results: Results) => {
   ctx.drawImage(results.image, 0, 0, width, height);
 
   if (results.multiHandLandmarks) {
+    console.log(results.multiHandLandmarks);
     //見つけた手の数だけ処理を繰り返す
     for (const landmarks of results.multiHandLandmarks) {
       //骨格を描画
@@ -48,14 +58,16 @@ export const drawCanvas = (ctx: CanvasRenderingContext2D, results: Results) => {
         lineWidth: 6,
         radius: 5
       });
+    }
 
+    for (const landmarks of results.multiHandLandmarks) {
       cvFunction(ctx, landmarks, width, height);
       drawYari(ctx);
       const ctx2 = ctx;
       throwYari(ctx2);
-
-      // takoPee2Func(canvasElement.width);
     }
+
+    // takoPee2Func(canvasElement.width);
   }
   // takoPeeFunc(canvasElement.width);
   ctx.restore();
@@ -69,7 +81,7 @@ function cvFunction(
 ) {
   let points: number[] = [];
   //手のひらや親指の付け根付近以外の関節を取得
-  for (var i = 2; i < 21; i++) {
+  for (let i = 2; i < 21; i++) {
     //0~1で表現されたx,yを画像のサイズに変換
     points.push(landmarks[i].x * width);
     points.push(landmarks[i].y * height);
@@ -107,15 +119,14 @@ function dis(ctx: CanvasRenderingContext2D, distance: number) {
   setTimeout(() => {
     const nowDis = distance3;
     const d = nowDis - distance;
-    // console.log(`distanceの差は${d}です`);
+    // 距離がnミリ秒後の距離とリアルタイムの距離が100以上なら槍を飛ばす
     if (d > 100) {
-      // console.log('ロンギヌスの槍を投げる');
-      if (isCreate) {
-        // 同時に複数のDOMが生成されるのを防ぐ isCreate
-        isCreate = false;
+      // 同時に複数のDOMが生成されるのを防ぐ isCreate
+      if (!isCreate) {
+        isCreate = true;
         yariDoms.push(createYariImg());
         setTimeout(() => {
-          isCreate = true;
+          isCreate = false;
         }, 200);
       }
     }
@@ -124,7 +135,6 @@ function dis(ctx: CanvasRenderingContext2D, distance: number) {
 
 function drawYari(ctx: CanvasRenderingContext2D) {
   const yari = document.getElementById('Yari') as HTMLImageElement;
-
   if (yari == null) return;
   // canvasCtx.drawImage(yari, 0, 0, yari.width, yari.height);
   //楕円の角度
@@ -136,13 +146,14 @@ function drawYari(ctx: CanvasRenderingContext2D) {
   //位置指定
   ctx.translate(ell.center.x, ell.center.y);
 
-  let mul = (ratio * 1.2 * ell.size.width) / yari.width;
+  if (yariDoms.length) ratio = 1; //投げた後の槍のサイズが小さくなることを防ぐ
+  let mul = (1 * 1.2 * ell.size.width) / yari.width;
   //角度指定
   ctx.rotate((angle * Math.PI) / 180.0);
   //楕円を描画
   ctx.beginPath();
   ctx.ellipse(0, 0, ell.size.width / 2.0, ell.size.height / 2.0, 0, 0, 2 * Math.PI);
-  ctx.stroke();
+  // ctx.stroke();
 
   ctx.scale(mul, -mul);
   console.log('yariDoms.length', yariDoms.length, yariDoms);

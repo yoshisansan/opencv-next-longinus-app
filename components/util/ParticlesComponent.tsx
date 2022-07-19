@@ -5,6 +5,10 @@ import { loadFull } from 'tsparticles';
 import mustThrow from 'public/img/mustThrow.png';
 import { Box } from '@chakra-ui/react';
 
+const tsParticle = css`
+  zindex: -1 !important;
+  height: '100px';
+`;
 const particleOption = {};
 
 const ParticlesComponent = () => {
@@ -22,73 +26,72 @@ const ParticlesComponent = () => {
     <Box h="200px" zIndex={-1}>
       <Particles
         id="tsparticles"
-        css={{ height: '100px', zIndex: -1 }}
+        css={tsParticle}
         init={particlesInit}
         loaded={particlesLoaded}
         height="100px"
         options={{
           background: {
-            color: '#181A18',
+            color: '#181A18'
           },
           fpsLimit: 60,
           interactivity: {
             detectsOn: 'canvas',
             events: {
-              resize: true,
-            },
+              resize: true
+            }
           },
           particles: {
             move: {
-              angle: {
-                value: 10,
-              },
+              angle: 10,
               attract: {
                 rotate: {
                   x: 600,
-                  y: 1200,
-                },
+                  y: 1200
+                }
               },
               direction: 'right',
               enable: true,
               outModes: {
+                default: 'out',
                 bottom: 'out',
                 left: 'out',
                 right: 'out',
-                top: 'out',
+                top: 'out'
               },
-              speed: 1,
+              speed: 1
             },
             color: {
-              value: '#ffffff',
+              value: '#ffffff'
             },
             number: {
               density: {
                 enable: true,
-                area: 1000,
+                area: 1000
               },
               limit: 0,
-              value: 300,
+              value: 300
             },
             opacity: {
               animation: {
                 enable: true,
                 minimumValue: 0.05,
                 speed: 1,
-                sync: false,
+                sync: false
               },
               random: {
                 enable: true,
-                minimumValue: 0.05,
+                minimumValue: 0.05
               },
-              value: 1,
+              value: 1
             },
             shape: {
               type: 'image',
               image: {
                 src: mustThrow.src,
                 width: 1000,
-                height: 400,
-              },
+                height: 400
+              }
             },
             size: {
               value: 100, //シェイプの大きさ
@@ -97,10 +100,10 @@ const ParticlesComponent = () => {
                 enable: false, //シェイプの大きさをアニメーションさせるか否か
                 speed: 40, //アニメーションのスピード
                 size_min: 0.1, //大きさの最小値
-                sync: false, //全てのシェイプを同時にアニメーションさせるか否か
-              },
-            },
-          },
+                sync: false //全てのシェイプを同時にアニメーションさせるか否か
+              }
+            }
+          }
         }}
       />
     </Box>

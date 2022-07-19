@@ -39,10 +39,10 @@ const Home = () => {
       <Box
         w="100vw"
         h="80px"
-        backgroundColor="#fff"
+        backgroundColor="#000"
         mr="calc(50% - 50vw)"
         ml="calc(50% - 50vw)"
-        p="0 16px"
+        p="24px"
         display="table">
         <MediaPipeComponent />
       </Box>

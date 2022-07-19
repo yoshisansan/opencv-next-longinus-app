@@ -97,7 +97,7 @@ const styles = {
   `,
   canvas: css`
     position: absolute;
-    top: 40px;
+    top: 0;
     width: 1280px;
     height: 720px;
     background-color: #fff;
