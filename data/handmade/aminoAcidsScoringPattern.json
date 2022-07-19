@@ -1,0 +1,104 @@
+{
+  "point5": {
+    "ILE": 32,
+    "LEU": 66,
+    "LYS": 57,
+    "AAS": 28,
+    "AAA": 52,
+    "THR": 31,
+    "TRP": 8.5,
+    "VAL": 43,
+    "HIS": 20,
+    "ARG": 100,
+    "AAT": 337,
+    "Target": {
+      "JA": "0.5歳",
+      "EN": "0.5 years old"
+    }
+  },
+  "until2": {
+    "ILE": 31,
+    "LEU": 63,
+    "LYS": 52,
+    "AAS": 26,
+    "AAA": 46,
+    "THR": 27,
+    "TRP": 7.4,
+    "VAL": 42,
+    "HIS": 18,
+    "ARG": 100,
+    "AAT": 312,
+    "Target": {
+      "JA": "1~2歳",
+      "EN": "1~2 years old"
+    }
+  },
+  "until10": {
+    "ILE": 31,
+    "LEU": 63,
+    "LYS": 52,
+    "AAS": 26,
+    "AAA": 46,
+    "THR": 27,
+    "TRP": 7.4,
+    "VAL": 42,
+    "HIS": 16,
+    "ARG": 100,
+    "AAT": 292,
+    "Target": {
+      "JA": "3~10歳",
+      "EN": "3~10 years old"
+    }
+  },
+  "until14": {
+    "ILE": 30,
+    "LEU": 60,
+    "LYS": 48,
+    "AAS": 24,
+    "AAA": 41,
+    "THR": 25,
+    "TRP": 6.5,
+    "VAL": 40,
+    "HIS": 16,
+    "ARG": 100,
+    "AAT": 290,
+    "Target": {
+      "JA": "11~14歳",
+      "EN": "11~14 years old"
+    }
+  },
+  "until17": {
+    "ILE": 30,
+    "LEU": 60,
+    "LYS": 47,
+    "AAS": 23,
+    "AAA": 40,
+    "THR": 24,
+    "TRP": 6.3,
+    "VAL": 40,
+    "HIS": 16,
+    "ARG": 100,
+    "AAT": 286,
+    "Target": {
+      "JA": "15~17歳",
+      "EN": "15~17 years old"
+    }
+  },
+  "adult": {
+    "ILE": 30,
+    "LEU": 59,
+    "LYS": 45,
+    "AAS": 22,
+    "AAA": 38,
+    "THR": 23,
+    "TRP": 6.0,
+    "VAL": 39,
+    "HIS": 15,
+    "ARG": 0,
+    "AAT": 277,
+    "Target": {
+      "JA": "18歳以上",
+      "EN": "18 years and over"
+    }
+  }
+}

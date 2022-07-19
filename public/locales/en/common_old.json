@@ -1,0 +1,20 @@
+{
+  "hello": "hello world!",
+  "concept": "A website where you can find food combinations with a good balance of amino acids.",
+  "Search": "Search",
+  "Search food": "Search food",
+  "Filtering": "Filtering",
+  "アミノ酸スコアに基づいたプロテイン合計": "",
+  "example: onion, chicken": "",
+  "AAA": "Aromatic amino acid",
+  "AAS": "Sulfur containing amino acid",
+  "TRP": "Tryptophan",
+  "HIS": "Histidine",
+  "THR": "Threonine",
+  "ILE": "Isoleucine",
+  "LYS": "Lysine",
+  "VAL": "Valine",
+  "LEU": "Leucine",
+  "PROTEIN": "Protein",
+  "Amino Acids Score: ": ""
+}

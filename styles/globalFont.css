@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'Times New Roman';
+  src: local('Times New Roman.woff2'),
+    url('../public/fonts/Times New Roman.woff2') format('woff2');
+  font-style: normal;
+  font-weight: normal;
+}
