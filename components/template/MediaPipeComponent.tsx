@@ -5,7 +5,6 @@ import { Camera } from '@mediapipe/camera_utils';
 import { Hands, Results } from '@mediapipe/hands';
 import { drawCanvas } from '../util/drawCanvas';
 import EvaPNG from 'public/img/eva.png';
-import { Image } from '@chakra-ui/react';
 
 const MediaPipeComponent: FC = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -28,7 +27,7 @@ const MediaPipeComponent: FC = () => {
     const hands = new Hands({
       locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-      },
+      }
     });
 
     hands.setOptions({
@@ -36,21 +35,18 @@ const MediaPipeComponent: FC = () => {
       maxNumHands: 1, //認識可能な手の最大数
       modelComplexity: 1, //精度に関する設定(0~1)
       minDetectionConfidence: 0.5, //手検出の信頼度
-      minTrackingConfidence: 0.5, //手追跡の信頼度
+      minTrackingConfidence: 0.5 //手追跡の信頼度
     });
 
     hands.onResults(onResults);
 
-    if (
-      typeof webcamRef.current !== 'undefined' &&
-      webcamRef.current !== null
-    ) {
+    if (typeof webcamRef.current !== 'undefined' && webcamRef.current !== null) {
       const camera = new Camera(webcamRef.current.video!, {
         onFrame: async () => {
           await hands.send({ image: webcamRef.current!.video! });
         },
         width: 1280,
-        height: 720,
+        height: 720
       });
       camera.start();
     }
@@ -63,10 +59,9 @@ const MediaPipeComponent: FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div id="MediaPipe" className={styles.container}>
       {/* capture */}
       <Webcam
-        id="hoge"
         audio={false}
         style={{ visibility: 'hidden' }}
         width={1280}
@@ -76,19 +71,14 @@ const MediaPipeComponent: FC = () => {
         videoConstraints={{ width: 1280, height: 720, facingMode: 'user' }}
       />
       {/* draw */}
-      <canvas
-        ref={canvasRef}
-        className={styles.canvas}
-        width={1280}
-        height={720}
-      />
+      <canvas ref={canvasRef} className={styles.canvas} width={1280} height={720} />
       <img id="Yari" src={EvaPNG.src} />
       {/* output */}
-      <div className={styles.buttonContainer}>
+      {/* <div className={styles.buttonContainer}>
         <button className={styles.button} onClick={OutputData}>
           Output Data
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -99,8 +89,7 @@ const MediaPipeComponent: FC = () => {
 const styles = {
   container: css`
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -108,6 +97,7 @@ const styles = {
   `,
   canvas: css`
     position: absolute;
+    top: 40px;
     width: 1280px;
     height: 720px;
     background-color: #fff;
@@ -125,7 +115,7 @@ const styles = {
     border-radius: 5px;
     padding: 10px 10px;
     cursor: pointer;
-  `,
+  `
 };
 
 export default MediaPipeComponent;

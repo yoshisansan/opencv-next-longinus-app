@@ -1,13 +1,9 @@
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
-import {
-  HAND_CONNECTIONS,
-  NormalizedLandmarkListList,
-  NormalizedLandmarkList,
-  Results,
-} from '@mediapipe/hands';
-import cv, { Mat, Rect } from 'opencv-ts';
-// const cv = require('opencv.js');
-let ell: {
+import { HAND_CONNECTIONS, NormalizedLandmarkList, Results } from '@mediapipe/hands';
+import cv, { Mat } from 'opencv-ts';
+import EvaPNG from 'public/img/eva.png';
+
+type CustomEll = {
   angle: number;
   center: { x: number; y: number };
   size: {
@@ -15,10 +11,16 @@ let ell: {
     width: number;
   };
 };
+type YariDom = {
+  id: string;
+  elm: HTMLImageElement;
+  posY: number;
+};
+let ell: CustomEll;
 let ratio: number;
 let distance3: number;
-let flag: boolean = false;
-let posY = 0;
+let yariDoms: YariDom[] = [];
+let isCreate = true;
 /**
  * cnavasに描画する
  * @param ctx canvas context
@@ -38,16 +40,19 @@ export const drawCanvas = (ctx: CanvasRenderingContext2D, results: Results) => {
       //骨格を描画
       drawConnectors(ctx, landmarks, HAND_CONNECTIONS, {
         color: '#9876d6',
-        lineWidth: 8,
+        lineWidth: 8
       });
       //関節を描画
       drawLandmarks(ctx, landmarks, {
         color: '#affa3e',
         lineWidth: 6,
-        radius: 5,
+        radius: 5
       });
-      cvFunction(landmarks, width, height);
+
+      cvFunction(ctx, landmarks, width, height);
       drawYari(ctx);
+      const ctx2 = ctx;
+      throwYari(ctx2);
 
       // takoPee2Func(canvasElement.width);
     }
@@ -57,6 +62,7 @@ export const drawCanvas = (ctx: CanvasRenderingContext2D, results: Results) => {
 };
 
 function cvFunction(
+  ctx: CanvasRenderingContext2D,
   landmarks: NormalizedLandmarkList,
   width: number,
   height: number
@@ -84,10 +90,8 @@ function cvFunction(
   dx = (landmarks[7].x - landmarks[19].x) * width;
   dy = (landmarks[7].y - landmarks[19].y) * height;
   let distance2 = Math.sqrt(dx * dx + dy * dy);
-  //
+
   ratio = distance1 / distance2;
-  //0.6:close, 1.3:sumb up 閉じる条件は少し甘めに0.9にする
-  //0.9~1.3を0~1に正規化
   let close = 0.9;
   let up = 1.3;
   ratio = (Math.max(close, Math.min(up, ratio)) - close) / (up - close); //map(ratio,0.9,1.3,0,1,true);
@@ -96,17 +100,24 @@ function cvFunction(
   dx = (landmarks[6].x - landmarks[4].x) * width;
   dy = (landmarks[6].y - landmarks[4].y) * height;
   distance3 = Math.sqrt(dx * dx + dy * dy);
-  dis(distance3);
+  dis(ctx, distance3);
 }
 
-function dis(distance: number) {
+function dis(ctx: CanvasRenderingContext2D, distance: number) {
   setTimeout(() => {
     const nowDis = distance3;
     const d = nowDis - distance;
     // console.log(`distanceの差は${d}です`);
     if (d > 100) {
-      console.log('ロンギヌスの槍を投げる');
-      flag = true;
+      // console.log('ロンギヌスの槍を投げる');
+      if (isCreate) {
+        // 同時に複数のDOMが生成されるのを防ぐ isCreate
+        isCreate = false;
+        yariDoms.push(createYariImg());
+        setTimeout(() => {
+          isCreate = true;
+        }, 200);
+      }
     }
   }, 500);
 }
@@ -125,51 +136,53 @@ function drawYari(ctx: CanvasRenderingContext2D) {
   //位置指定
   ctx.translate(ell.center.x, ell.center.y);
 
-  let mul = (ratio * 1.4 * ell.size.width) / yari.width;
+  let mul = (ratio * 1.2 * ell.size.width) / yari.width;
   //角度指定
   ctx.rotate((angle * Math.PI) / 180.0);
   //楕円を描画
   ctx.beginPath();
-  ctx.ellipse(
-    0,
-    0,
-    ell.size.width / 2.0,
-    ell.size.height / 2.0,
-    0,
-    0,
-    2 * Math.PI
-  );
+  ctx.ellipse(0, 0, ell.size.width / 2.0, ell.size.height / 2.0, 0, 0, 2 * Math.PI);
   ctx.stroke();
 
   ctx.scale(mul, -mul);
-
-  if (flag == false) {
-    ctx.drawImage(
-      yari,
-      -yari.width / 2.0,
-      -yari.height,
-      yari.width,
-      yari.height
-    );
-  } else {
-    const yariYari = throwYari(ctx);
+  console.log('yariDoms.length', yariDoms.length, yariDoms);
+  if (!yariDoms.length) {
+    ctx.drawImage(yari, -yari.width / 2.0, -yari.height, yari.width, yari.height);
+  }
+}
+function yariyari(yariDom: YariDom, ctx: CanvasRenderingContext2D, i: number) {
+  ctx.drawImage(
+    yariDom.elm,
+    -yariDom.elm.width / 2.0,
+    -yariDom.elm.height - yariDom.posY * 40,
+    yariDom.elm.width,
+    yariDom.elm.height
+  );
+  yariDom.posY++;
+  if (yariDom.posY > 15) {
+    yariDom.elm.remove();
+    yariDoms.splice(i - 1, i);
+    if (yariDoms.length == 1) {
+      yariDoms = [];
+    }
   }
 }
 
 function throwYari(ctx: CanvasRenderingContext2D) {
-  const yari = document.getElementById('Yari') as HTMLImageElement;
-
-  posY++;
-  console.log(posY);
-  ctx.drawImage(
-    yari,
-    -yari.width / 2.0,
-    -yari.height - posY * 50,
-    yari.width,
-    yari.height
-  );
-  if (posY > 20) {
-    flag = false;
-    posY = 0;
+  if (yariDoms.length) {
+    yariDoms.map((yariDom: YariDom, i: number) => {
+      yariyari(yariDom, ctx, i);
+    });
   }
+}
+
+function createYariImg() {
+  const randId = Math.random().toString(32).substring(2);
+  const parent = document.getElementById('MediaPipe') as HTMLDivElement;
+  const yari = document.getElementById(`Yari`) as HTMLImageElement;
+  const newElm = document.createElement('img');
+  newElm.src = EvaPNG.src;
+  newElm.id = `Yari${randId}`;
+
+  return { elm: parent.insertBefore(newElm, yari), posY: 0, id: randId };
 }
