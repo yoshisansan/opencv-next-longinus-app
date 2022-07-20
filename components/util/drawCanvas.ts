@@ -44,7 +44,6 @@ export const drawCanvas = (ctx: CanvasRenderingContext2D, results: Results) => {
   ctx.drawImage(results.image, 0, 0, width, height);
 
   if (results.multiHandLandmarks) {
-    console.log(results.multiHandLandmarks);
     //見つけた手の数だけ処理を繰り返す
     for (const landmarks of results.multiHandLandmarks) {
       //骨格を描画
@@ -89,7 +88,8 @@ function cvFunction(
   //点の集まりをOpenCVで扱えるデータフォーマットに変換
   let mat: Mat = cv.matFromArray(points.length / 2, 1, cv.CV_32SC2, points);
   //点の集まりにフィットする楕円を計算
-  ell = cv.fitEllipse(mat);
+  const el = cv.fitEllipse(mat);
+  ell = el as CustomEll;
   //メモリの解放
   mat.delete();
 
@@ -127,7 +127,7 @@ function dis(ctx: CanvasRenderingContext2D, distance: number) {
         yariDoms.push(createYariImg());
         setTimeout(() => {
           isCreate = false;
-        }, 200);
+        }, 400);
       }
     }
   }, 500);
@@ -147,7 +147,8 @@ function drawYari(ctx: CanvasRenderingContext2D) {
   ctx.translate(ell.center.x, ell.center.y);
 
   if (yariDoms.length) ratio = 1; //投げた後の槍のサイズが小さくなることを防ぐ
-  let mul = (1 * 1.2 * ell.size.width) / yari.width;
+  ratio = ratio < 0.6 ? (ratio = 0.6) : ratio;
+  let mul = (ratio * 1.2 * ell.size.width) / yari.width;
   //角度指定
   ctx.rotate((angle * Math.PI) / 180.0);
   //楕円を描画
@@ -156,7 +157,6 @@ function drawYari(ctx: CanvasRenderingContext2D) {
   // ctx.stroke();
 
   ctx.scale(mul, -mul);
-  console.log('yariDoms.length', yariDoms.length, yariDoms);
   if (!yariDoms.length) {
     ctx.drawImage(yari, -yari.width / 2.0, -yari.height, yari.width, yari.height);
   }

@@ -69,45 +69,6 @@ const lightMode = {
   }
 };
 
-const darkMode = {
-  colors: {
-    moji: (props: any) => ({
-      main: props.colorMode === 'light' ? '#1F3537' : 'red',
-      sub: '#ACBCBE'
-    }),
-    solid: {
-      main: '#E2E4E4'
-    },
-    brand: {
-      main: '#007985',
-      sub: '#00856E'
-    },
-    background: {
-      main: '#000',
-      brandColor: '#007985'
-    }
-  },
-  fontSizes: {
-    xmini: '0.7em',
-    mini: '0.8em',
-    base: '16px',
-    big: '1.4142135623em',
-    bigX: '1.6180339887em'
-  },
-  borders: {
-    main: '1px solid #E2E4E4'
-  },
-  radii: {
-    main: '8px'
-  },
-  shadows: {
-    main: 'rgba(0, 0, 0, 0.1) 0px 3px 5px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px'
-  },
-  colorScheme: {
-    main: '#000'
-  }
-};
-
 const styles = {
   global: {
     'html, body': {
@@ -157,43 +118,13 @@ const styles = {
   }
 };
 
-// DarkModeにうまく切り替えられない
 export const chakraGlobalTheme = extendTheme({
-  // config: {
-  //   initialColorMode: "light",
-  //   useSystemColorMode: false,
-  // },
   colors: lightMode.colors,
   fontSizes: lightMode.fontSizes,
   borders: lightMode.borders,
   radii: lightMode.radii,
   shadows: lightMode.shadows,
   colorScheme: lightMode.colorScheme,
-  // modes: {
-  //   light: {
-  //     colors: lightMode.colors,
-  //     fontSizes: lightMode.fontSizes,
-  //     borders: lightMode.borders,
-  //     radii: lightMode.radii,
-  //     shadows: lightMode.shadows,
-  //     colorScheme: lightMode.colorScheme,
-  //   },
-  //   dark: {
-  //     colors: darkMode.colors,
-  //     fontSizes: darkMode.fontSizes,
-  //     borders: darkMode.borders,
-  //     radii: darkMode.radii,
-  //     shadows: darkMode.shadows,
-  //     colorScheme: darkMode.colorScheme,
-  //   }
-  // },
   styles,
   breakpoints
 });
-
-// colors: lightMode.colors,
-// fontSizes: lightMode.fontSizes,
-// borders: lightMode.borders,
-// radii: lightMode.radii,
-// shadows: lightMode.shadows,
-// colorScheme: lightMode.colorScheme,

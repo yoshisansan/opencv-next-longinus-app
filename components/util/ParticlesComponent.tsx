@@ -9,7 +9,6 @@ const tsParticle = css`
   zindex: -1 !important;
   height: '100px';
 `;
-const particleOption = {};
 
 const ParticlesComponent = () => {
   const particlesInit = async (main: any) => {

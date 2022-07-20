@@ -53,10 +53,10 @@ const MediaPipeComponent: FC = () => {
   }, [onResults]);
 
   /** 検出結果をconsoleに出力する */
-  const OutputData = () => {
-    const results = resultsRef.current!;
-    console.log(results.multiHandLandmarks);
-  };
+  // const OutputData = () => {
+  //   const results = resultsRef.current!;
+  //   console.log(results.multiHandLandmarks);
+  // };
 
   return (
     <div id="MediaPipe" className={styles.container}>
@@ -72,7 +72,7 @@ const MediaPipeComponent: FC = () => {
       />
       {/* draw */}
       <canvas ref={canvasRef} className={styles.canvas} width={1280} height={720} />
-      <img id="Yari" src={EvaPNG.src} />
+      <img id="Yari" src={EvaPNG.src} style={{ visibility: 'hidden' }} />
       {/* output */}
       {/* <div className={styles.buttonContainer}>
         <button className={styles.button} onClick={OutputData}>

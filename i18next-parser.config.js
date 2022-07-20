@@ -1,12 +1,12 @@
-module.exports = {  
+module.exports = {
   createOldCatalogs: true, // save previous translation catalogs to the \_old folder
 
   lexers: {
     js: ['JsxLexer'], // we're writing jsx inside .js files
-    default: ['JavascriptLexer'],
+    default: ['JavascriptLexer']
   },
 
-  locales: ['es', 'en', 'ja', 'zh', 'de'],
+  locales: ['es', 'en', 'ja', 'zh', 'de', 'arab', 'id', 'et', 'tr'],
   // An array of the locales in your applications
 
   namespaceSeparator: '.',
@@ -19,14 +19,14 @@ module.exports = {
   // Where to write the locale files relative to process.cwd()
 
   input: [
-      'components/**/*.{ts,tsx}',
-      'components/*.{ts, tsx}',
-      'containers/**/*.{ts,tsx}',
-      'containers/*.{ts,tsx}',
-      'pages/**/*.{ts,tsx}',
-      'pages/*.{ts,tsx}',
-  ],
+    'components/**/*.{ts,tsx}',
+    'components/*.{ts, tsx}',
+    'containers/**/*.{ts,tsx}',
+    'containers/*.{ts,tsx}',
+    'pages/**/*.{ts,tsx}',
+    'pages/*.{ts,tsx}'
+  ]
   // An array of globs that describe where to look for source files
   // relative to the location of the configuration file
   // Globs syntax: https://github.com/isaacs/node-glob#glob-primer
-}
+};

@@ -2,7 +2,7 @@ import 'styles/globalFont.css';
 import { FC } from 'react';
 import { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
-import { ChakraProvider, ColorModeScript, useColorMode, Button } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { chakraGlobalTheme } from 'components/util/chakraGlobalSettings';
 import Layout from 'components/template/Layout';
 

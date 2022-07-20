@@ -1,5 +1,4 @@
 import { Box, Flex } from '@chakra-ui/react';
-import { url } from 'inspector';
 import MoonWebp from 'public/img/moon.webp';
 
 const Footer = () => (
@@ -17,7 +16,7 @@ const Footer = () => (
     alignItems="center"
     zIndex="10"
     position="absolute">
-    <Box color="#fff">Footer</Box>
+    <Box color="#fff">Copyright © 2022- あきふみ All Rights Reserved.</Box>
   </Flex>
 );
 
