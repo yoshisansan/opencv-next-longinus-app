@@ -4,12 +4,18 @@
 
 const axios = require('axios');
 const EN_JSON = require('../../public/locales/en/manualTranslations.json');
-// const DE_JSON = require('../../public/locales/de/manualTranslations.json')
+const DE_JSON = require('../../public/locales/de/manualTranslations.json');
+const ES_JSON = require('../../public/locales/es/manualTranslations.json');
+const ET_JSON = require('../../public/locales/et/manualTranslations.json');
+const ID_JSON = require('../../public/locales/id/manualTranslations.json');
+const TR_JSON = require('../../public/locales/tr/manualTranslations.json');
+const ZH_JSON = require('../../public/locales/zh/manualTranslations.json');
 const JA_JSON = require('../../public/locales/ja/manualTranslations.json');
 const fs = require('fs');
 require('dotenv').config({ path: '.env.development.local' });
 
 const translate = async (baseLang, targetLang) => {
+  console.log(targetLang);
   const baseLangManualJSON = baseLang.manualJSON;
   const targetManualJSON = targetLang.manualJSON;
 
@@ -57,13 +63,43 @@ const options = {
       deeplKeyName: 'JA',
       manualJSON: JA_JSON,
       outputDir: 'public/locales/ja/common.json'
+    },
+    {
+      name: 'de',
+      deeplKeyName: 'DE',
+      manualJSON: DE_JSON,
+      outputDir: 'public/locales/de/common.json'
+    },
+    {
+      name: 'es',
+      deeplKeyName: 'ES',
+      manualJSON: ES_JSON,
+      outputDir: 'public/locales/es/common.json'
+    },
+    {
+      name: 'et',
+      deeplKeyName: 'ET',
+      manualJSON: ET_JSON,
+      outputDir: 'public/locales/et/common.json'
+    },
+    {
+      name: 'id',
+      deeplKeyName: 'ID',
+      manualJSON: ID_JSON,
+      outputDir: 'public/locales/id/common.json'
+    },
+    {
+      name: 'tr',
+      deeplKeyName: 'TR',
+      manualJSON: TR_JSON,
+      outputDir: 'public/locales/tr/common.json'
+    },
+    {
+      name: 'zh',
+      deeplKeyName: 'ZH',
+      manualJSON: ZH_JSON,
+      outputDir: 'public/locales/zh/common.json'
     }
-    // {
-    //   name: 'de',
-    //   deeplKeyName: 'DE',
-    //   manualJSON: DE_JSON,
-    //   outputDir: 'public/locales/de/common.json'
-    // }s
   ]
 };
 
