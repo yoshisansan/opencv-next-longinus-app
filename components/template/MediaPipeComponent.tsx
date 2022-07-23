@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import React, { useCallback, useEffect, useRef, FC, useState } from 'react';
+import { useCallback, useEffect, useRef, FC, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import Webcam from 'react-webcam';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { Camera } from '@mediapipe/camera_utils';
 import { Hands, Results } from '@mediapipe/hands';
 import { drawCanvas } from '../util/drawCanvas';
-import EvaPNG from 'public/img/eva.png';
-import { Box, Button, Image, Text, Flex, HStack } from '@chakra-ui/react';
+import EvaWebp from 'public/img/eva.webp';
+import { Box, Button, Image, Flex, HStack } from '@chakra-ui/react';
 import SNS from 'components/organism/SNS';
 
 const Circle = css`
@@ -52,7 +53,7 @@ const Circle = css`
 const CircleInner = css`
   position: absolute;
   color: #fff;
-  font-size: 40px;
+  font-size: 62px;
   font-weight: bold;
   font-family: 'Times New Roman';
   top: 50%;
@@ -73,7 +74,10 @@ const MediaPipeComponent: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resultsRef = useRef<Results>();
   const { t } = useTranslation('common');
-
+  const origin =
+    typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
+  const { locale } = useRouter();
+  const url = `${origin}/${locale}`;
   /**
    * 検出結果（フレーム毎に呼び出される）
    * @param results
@@ -172,10 +176,10 @@ const MediaPipeComponent: FC = () => {
         />
         {/* draw */}
         <canvas ref={canvasRef} css={styles.canvas} width={1280} height={720} />
-        <img id="Yari" src={EvaPNG.src} style={{ visibility: 'hidden' }} />
+        <img id="Yari" src={EvaWebp.src} style={{ visibility: 'hidden' }} />
         {/* countdown */}
         {isTimer && countdown != 0 && (
-          <Box css={Circle}>
+          <Box maxW={1280} m="0 auto">
             <Box css={CircleInner}>{countdown}</Box>
           </Box>
         )}
@@ -202,7 +206,7 @@ const MediaPipeComponent: FC = () => {
           </>
         )}
       </Box>
-      <Flex alignItems="center" justify="space-between" margin="0 auto" mt="20px">
+      <Flex maxW="1280px" alignItems="center" justify="space-between" margin="0 auto" mt="20px">
         <Box>
           <Button
             mr="12px"
@@ -245,7 +249,12 @@ const MediaPipeComponent: FC = () => {
           </a>
         </Box>
         <HStack spacing={2}>
-          <SNS title="hoooi" />
+          <SNS
+            title={t('title')}
+            shareText={t('Share text')}
+            url={url}
+            twitterId={process.env.NEXT_PUBLIC_TWITTER_ID}
+          />
         </HStack>
       </Flex>
     </>
@@ -284,16 +293,6 @@ const styles = {
     border-radius: 5px;
     padding: 10px 10px;
     cursor: pointer;
-  `,
-  circle: css`
-    position: relative;
-    width: 120px;
-    height: 120px;
-    background: #333;
-    border-radius: 50%;
-    text-align: center;
-    overflow: hidden;
-    z-index: 1;
   `
 };
 

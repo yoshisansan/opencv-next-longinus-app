@@ -73,7 +73,7 @@ const styles = {
   global: {
     'html, body': {
       color: `moji.main`,
-      background: '#E6F2F3',
+      background: '#000',
       lineHeight: '1.6180339887',
       fontSize: 'base',
       letterSpacing: '0.08em',

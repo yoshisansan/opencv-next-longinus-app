@@ -4,14 +4,15 @@ import MoonWebp from 'public/img/moon.webp';
 const Footer = () => (
   <Flex
     style={{
-      backgroundImage: `url(${MoonWebp.src})`
+      backgroundImage: `url(${MoonWebp.src})`,
+      backgroundRepeat: 'no-repeat'
     }}
     objectFit="cover"
     mt="24px"
     w="100%"
     h="80px"
     p="0 18px"
-    background="#007985"
+    background="#000"
     justifyContent="space-between"
     alignItems="center"
     zIndex="10"

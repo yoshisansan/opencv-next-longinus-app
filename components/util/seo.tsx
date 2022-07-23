@@ -50,13 +50,13 @@ const SEO: FC<{
               url: 'https://nora-dev.com/images/nora-dev.png',
               width: 1200,
               height: 630,
-              alt: `aminosan.appのサムネイル画像`
+              alt: `ロンギヌスの槍を投げ放題サイトのサムネイル画像`
             }
           ],
           site_name: siteTitle
         }}
         twitter={{
-          site: '@akifumiyoshimu',
+          site: '@akifumidev',
           cardType: 'summary_large_image'
         }}
         additionalLinkTags={[

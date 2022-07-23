@@ -11,29 +11,29 @@ import { FaFacebook, FaGetPocket, FaLine, FaTwitter } from 'react-icons/fa';
 import { SiHatenabookmark } from 'react-icons/si';
 
 type ShareButtonsProps = {
-  urlBlog: string;
   title: string;
+  shareText: string;
+  url: string;
+  twitterId: string | undefined;
 };
 
-const SNS: FC<{ title: string }> = ({ title }) => {
-  const origin =
-    typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
-  const TWITTER_ID = 'hoge';
+const SNS: FC<ShareButtonsProps> = ({ title, shareText, url, twitterId }) => {
+  console.log();
   return (
     <>
-      <TwitterShareButton url={origin} title={title} via={TWITTER_ID}>
+      <TwitterShareButton url={url} title={`${shareText} - ${title}`} via={twitterId}>
         <Icon as={FaTwitter} boxSize={8} fill="gray.400" _hover={{ fill: '#d03131' }} />
       </TwitterShareButton>
-      <FacebookShareButton url={origin}>
+      <FacebookShareButton url={url}>
         <Icon as={FaFacebook} boxSize={8} fill="gray.400" _hover={{ fill: '#d03131' }} />
       </FacebookShareButton>
-      <LineShareButton title={title} url={origin}>
+      <LineShareButton title={`${shareText} - ${title}`} url={url}>
         <Icon as={FaLine} boxSize={8} fill="gray.400" _hover={{ fill: '#d03131' }} />
       </LineShareButton>
-      <PocketShareButton title={title} url={origin}>
+      <PocketShareButton title={title} url={url}>
         <Icon as={FaGetPocket} boxSize={8} fill="gray.400" _hover={{ fill: '#d03131' }} />
       </PocketShareButton>
-      <HatenaShareButton title={title} url={origin}>
+      <HatenaShareButton title={`${shareText} - ${title}`} url={url}>
         <Icon as={SiHatenabookmark} boxSize={8} fill="gray.400" _hover={{ fill: '#d03131' }} />
       </HatenaShareButton>
     </>

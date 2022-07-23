@@ -1,7 +1,7 @@
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import { HAND_CONNECTIONS, NormalizedLandmarkList, Results } from '@mediapipe/hands';
 import cv, { Mat } from 'opencv-ts';
-import EvaPNG from 'public/img/eva.png';
+import EvaPNG from 'public/img/eva.webp';
 
 type CustomEll = {
   angle: number;
@@ -146,9 +146,10 @@ function drawYari(ctx: CanvasRenderingContext2D) {
   //位置指定
   ctx.translate(ell.center.x, ell.center.y);
 
-  if (yariDoms.length) ratio = 1; //投げた後の槍のサイズが小さくなることを防ぐ
+  // ratioは画質を良く見せるるためにあえて1以下の比率で設定
+  if (yariDoms.length) ratio = 0.8; //投げた後の槍のサイズ指定
   ratio = ratio < 0.6 ? (ratio = 0.6) : ratio;
-  let mul = (ratio * 1.2 * ell.size.width) / yari.width;
+  let mul = (ratio * 1.05 * ell.size.width) / yari.width;
   //角度指定
   ctx.rotate((angle * Math.PI) / 180.0);
   //楕円を描画
@@ -165,12 +166,12 @@ function yariyari(yariDom: YariDom, ctx: CanvasRenderingContext2D, i: number) {
   ctx.drawImage(
     yariDom.elm,
     -yariDom.elm.width / 2.0,
-    -yariDom.elm.height - yariDom.posY * 40,
+    -yariDom.elm.height - yariDom.posY * 56,
     yariDom.elm.width,
     yariDom.elm.height
   );
   yariDom.posY++;
-  if (yariDom.posY > 15) {
+  if (yariDom.posY > 22) {
     yariDom.elm.remove();
     yariDoms.splice(i - 1, i);
     if (yariDoms.length == 1) {
@@ -194,6 +195,7 @@ function createYariImg() {
   const newElm = document.createElement('img');
   newElm.src = EvaPNG.src;
   newElm.id = `Yari${randId}`;
+  newElm.style.visibility = 'hidden';
 
   return { elm: parent.insertBefore(newElm, yari), posY: 0, id: randId };
 }
