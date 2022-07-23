@@ -1,16 +1,74 @@
+/** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useRef, FC, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import Webcam from 'react-webcam';
-import { css } from '@emotion/css';
+import { css } from '@emotion/react';
 import { Camera } from '@mediapipe/camera_utils';
 import { Hands, Results } from '@mediapipe/hands';
 import { drawCanvas } from '../util/drawCanvas';
 import EvaPNG from 'public/img/eva.png';
-import { Box, Button, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Image, Text, Flex, HStack } from '@chakra-ui/react';
+import SNS from 'components/organism/SNS';
+
+const Circle = css`
+  position: absolute;
+  top: 32px;
+  left: 48px;
+  width: 120px;
+  height: 120px;
+  background: #000;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -60px;
+    width: 120px;
+    height: 120px;
+    background: #d3ba3e;
+    transform-origin: right 60px;
+    z-index: 2;
+    animation: rotateLeft 1040ms infinite linear;
+  }
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 60px;
+    width: 120px;
+    height: 120px;
+    background: #d3ba3e;
+    transform-origin: left 60px;
+    z-index: 3;
+    animation: rotateRight 1040ms infinite linear;
+  }
+`;
+
+const CircleInner = css`
+  position: absolute;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Times New Roman';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scaleY(1.4);
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  z-index: 4;
+`;
 
 const MediaPipeComponent: FC = () => {
   const [captureUrl, setCaptureUrl] = useState<string>('');
   const [countdown, setCountdown] = useState<number>(3);
+  const [isTimer, setIsTimer] = useState<boolean>(false);
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resultsRef = useRef<Results>();
@@ -68,15 +126,21 @@ const MediaPipeComponent: FC = () => {
     a.dispatchEvent(new CustomEvent('click'));
   };
 
-  let iv: any;
-  const captureTimer = (ms: number) => {
-    const leftTime = Date.now() + 3000;
+  let iv: NodeJS.Timer;
+  const captureTimer = (countNum: number) => {
+    const ms = countNum * 1000;
+    const leftTime = Date.now() + ms; // ミリ秒に調整
+
     iv = setInterval(() => {
       const nowTime = Date.now();
-      console.log(leftTime - nowTime);
       setCountdown((countdown: number) => countdown - 1);
-    }, ms);
+      if (leftTime - nowTime <= 0) {
+        handleClearInterval();
+        return;
+      }
+    }, 1000);
   };
+  const handleClearInterval = () => clearInterval(iv);
 
   const capture = useCallback((): void => {
     const imageSrc = canvasRef.current?.toDataURL('image/jpeg', 0.85);
@@ -95,7 +159,7 @@ const MediaPipeComponent: FC = () => {
 
   return (
     <>
-      <Box id="MediaPipe" className={styles.container}>
+      <Box id="MediaPipe" css={styles.container}>
         {/* capture */}
         <Webcam
           audio={false}
@@ -107,8 +171,14 @@ const MediaPipeComponent: FC = () => {
           videoConstraints={{ width: 1280, height: 720, facingMode: 'user' }}
         />
         {/* draw */}
-        <canvas ref={canvasRef} className={styles.canvas} width={1280} height={720} />
+        <canvas ref={canvasRef} css={styles.canvas} width={1280} height={720} />
         <img id="Yari" src={EvaPNG.src} style={{ visibility: 'hidden' }} />
+        {/* countdown */}
+        {isTimer && countdown != 0 && (
+          <Box css={Circle}>
+            <Box css={CircleInner}>{countdown}</Box>
+          </Box>
+        )}
         {/* capture */}
         {captureUrl !== '' && (
           <>
@@ -132,22 +202,52 @@ const MediaPipeComponent: FC = () => {
           </>
         )}
       </Box>
-      <div>
-        <Text color="#fff">{countdown}</Text>
-        <Button
-          onClick={() => {
-            captureTimer(1000);
-            if (captureUrl == '') return capture();
+      <Flex alignItems="center" justify="space-between" margin="0 auto" mt="20px">
+        <Box>
+          <Button
+            mr="12px"
+            color={isTimer ? '#e0e0e0' : '#333'}
+            onClick={async () => {
+              if (captureUrl != '') {
+                setCaptureUrl('');
 
-            clearInterval(captureTimer(1000));
-            setCaptureUrl('');
-          }}>
-          {captureUrl == '' ? '撮影する' : '撮り直す'}
-        </Button>
-        <a download={`Longinus-${formatDate(new Date())}.jpg`} href={captureUrl}>
-          <Button onClick={() => download()}>名前をつけて保存</Button>
-        </a>
-      </div>
+                return;
+              }
+              if (isTimer == true) return; //// 連続クリックさせない
+              setIsTimer(true);
+              handleClearInterval();
+              // キャプチャのカウントダウン
+              const countSecounds = 3;
+              const capTimer = () =>
+                new Promise<void>((resolve) => {
+                  setCountdown(countSecounds);
+                  captureTimer(countSecounds);
+                  setTimeout(() => {
+                    resolve();
+                  }, countSecounds * 1000);
+                });
+              await capTimer();
+              setIsTimer(false);
+              await capture();
+              setCountdown(countSecounds);
+            }}>
+            {captureUrl == '' ? '撮影する 📷' : '撮り直す 📷'}
+          </Button>
+          <a download={`Longinus-${formatDate(new Date())}.jpg`} href={captureUrl}>
+            <Button
+              color={captureUrl == '' ? '#e0e0e0' : '#333'}
+              onClick={() => {
+                if (captureUrl == '') return;
+                download();
+              }}>
+              名前をつけて保存 💾
+            </Button>
+          </a>
+        </Box>
+        <HStack spacing={2}>
+          <SNS title="hoooi" />
+        </HStack>
+      </Flex>
     </>
   );
 };
@@ -184,6 +284,16 @@ const styles = {
     border-radius: 5px;
     padding: 10px 10px;
     cursor: pointer;
+  `,
+  circle: css`
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background: #333;
+    border-radius: 50%;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
   `
 };
 

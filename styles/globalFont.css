@@ -24,3 +24,34 @@
     margin-top: 0;
   }
 }
+
+@keyframes rotateRight {
+  0% {
+    transform: rotate(0deg);
+    background: #d3ba3e;
+  }
+  50% {
+    transform: rotate(180deg);
+    background: #d3ba3e;
+  }
+  50.1% {
+    transform: rotate(0deg);
+    background: #000;
+  }
+  100% {
+    transform: rotate(0deg);
+    background: #000;
+  }
+}
+
+@keyframes rotateLeft {
+  0% {
+    transform: rotate(0deg);
+  }
+  50.1% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
