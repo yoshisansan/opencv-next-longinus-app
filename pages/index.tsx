@@ -1,11 +1,9 @@
-import ReactPlayer from 'react-player';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, lazy, Suspense } from 'react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import SEO from 'components/util/seo';
 import { Flex, Box, Text, Heading, AspectRatio } from '@chakra-ui/react';
-import MediaPipeComponent from 'components/template/MediaPipeComponent';
-import HowToMP4 from 'public/videos/howto.mp4';
+const MediaPipeComponent = lazy(() => import('components/template/MediaPipeComponent'));
 
 const Home = () => {
   const { t } = useTranslation('common');
@@ -28,7 +26,9 @@ const Home = () => {
         mr="calc(50% - 50vw)"
         ml="calc(50% - 50vw)"
         display="table">
-        <MediaPipeComponent />
+        <Suspense fallback={<div>hoge</div>}>
+          <MediaPipeComponent />
+        </Suspense>
       </Box>
       <Flex w="100%" m="0 auto" mt="24px" maxW="1000px" bg="#fff" justify="center">
         <Box>

@@ -89,7 +89,7 @@ function cvFunction(
   let mat: Mat = cv.matFromArray(points.length / 2, 1, cv.CV_32SC2, points);
   //点の集まりにフィットする楕円を計算
   const el = cv.fitEllipse(mat);
-  ell = el as CustomEll;
+  ell = el as any;
   //メモリの解放
   mat.delete();
 

@@ -1,29 +1,30 @@
-import Head from 'next/head'
-import { NextSeo } from 'next-seo'
-import { VFC } from 'react'
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
+import { FC } from 'react';
+import { useTranslation } from 'next-i18next';
 
 // type ThumbNail = {
 //   url: string | undefined;
 //   height: number;
 //   width: number;
 // };
-const SEO: VFC<{
+const SEO: FC<{
   title: string;
   description: string | undefined;
   url: string;
   pageType: string;
 }> = ({ title, description, url, pageType }) => {
-  const siteTitle = 'ロンギヌスの槍を投げ放題サイト';
-  // const subTitle = 'お金をかけない独学Webサービス開発';
+  const { t } = useTranslation('common');
+  const siteTitle = t('title');
 
   return (
     <>
       <Head>
-      {/* <script
+        {/* <script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
       /> */}
-      {/* <script
+        {/* <script
         dangerouslySetInnerHTML={{
           __html: `
         window.dataLayer = window.dataLayer || [];

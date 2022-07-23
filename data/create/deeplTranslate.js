@@ -15,7 +15,6 @@ const fs = require('fs');
 require('dotenv').config({ path: '.env.development.local' });
 
 const translate = async (baseLang, targetLang) => {
-  console.log(targetLang);
   const baseLangManualJSON = baseLang.manualJSON;
   const targetManualJSON = targetLang.manualJSON;
 

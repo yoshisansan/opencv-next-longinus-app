@@ -1,15 +1,68 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Box, Flex, Text, Image } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import ParticlesComponent from 'components/util/ParticlesComponent';
 import GrandfatherPNG from 'public/img/grandfather.png';
+import { US, JP, CN, EE, ES, DE, TR, ID } from 'country-flag-icons/react/3x2';
+import i18n from 'i18next';
 
 const Header = () => {
+  const origin =
+    typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
+
+  const router = useRouter();
   const { t } = useTranslation('common');
   const title = t('title');
+
   return (
-    <Box zIndex="1" h="200px">
-      <Flex w="100%" h="200px" p="24px" justifyContent="center" alignItems="center">
+    <Box zIndex="1" h="340px">
+      <Flex alignItems={'center'} pl="12px" w="100%" h="40px" bg="#333">
+        <Text m="4px" color="#fff">
+          Choose a language :{' '}
+        </Text>
+        <a href={`${origin}/en`}>
+          <Box onClick={() => i18n.changeLanguage('en')} cursor="pointer" m="4px" w="24px">
+            <US title="United States" />
+          </Box>
+        </a>
+        <a href={`${origin}`}>
+          <Box cursor="pointer" m="4px" w="24px">
+            <JP title="Japanese" />
+          </Box>
+        </a>
+        <a href={`${origin}/et`}>
+          <Box onClick={() => router.replace(`${origin}/et`)} m="4px" w="24px">
+            <EE title="Estonia" />
+          </Box>
+        </a>
+        <a href={`${origin}/es`}>
+          <Box m="4px" w="24px">
+            <ES title="Spain" />
+          </Box>
+        </a>
+        <a href={`${origin}/de`}>
+          <Box m="4px" w="24px">
+            <DE title="German" />
+          </Box>
+        </a>
+        <a href={`${origin}/tr`}>
+          <Box m="4px" w="24px">
+            <TR title="Turkey" />
+          </Box>
+        </a>
+        <a href={`${origin}/id`}>
+          <Box m="4px" w="24px">
+            <ID title="Indonesia" />
+          </Box>
+        </a>
+        <a href={`${origin}/zh`}>
+          <Box m="4px" w="24px">
+            <CN title="Chinese" />
+          </Box>
+        </a>
+      </Flex>
+      <Flex w="100%" h="300px" p="24px" justifyContent="center" alignItems="center">
         <Link href="/" passHref>
           <Text
             transform={`scaleY(1.4)`}

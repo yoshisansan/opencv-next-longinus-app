@@ -1,7 +1,7 @@
 module.exports = {
   i18n: {
     defaultLocale: 'ja',
-    locales: ['en', 'de', 'ja', 'arab', 'es', 'id', 'et', 'tr']
+    locales: ['en', 'de', 'ja', 'zh', 'es', 'id', 'et', 'tr']
   },
   domains: [
     {
@@ -12,11 +12,6 @@ module.exports = {
     {
       domain: 'localhost:3000/de',
       defaultLocale: 'de',
-      http: true
-    },
-    {
-      domain: 'localhost:3000/arab',
-      defaultLocale: 'arab',
       http: true
     },
     {
@@ -45,7 +40,7 @@ module.exports = {
       http: true
     },
     {
-      domain: 'localhost:3000',
+      domain: 'localhost:3000/jp',
       defaultLocale: 'ja',
       http: true
     }
