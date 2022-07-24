@@ -12,13 +12,11 @@ const tsParticle = css`
 
 const ParticlesComponent = () => {
   const particlesInit = async (main: any) => {
-    console.log(main);
-    console.log(mustThrow);
     await loadFull(main);
   };
 
   const particlesLoaded = async (container: any): Promise<void> => {
-    console.log(container);
+    // console.log(container);
   };
 
   return (

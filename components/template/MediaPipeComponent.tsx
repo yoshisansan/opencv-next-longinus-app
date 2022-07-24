@@ -8,7 +8,7 @@ import { Camera } from '@mediapipe/camera_utils';
 import { Hands, Results } from '@mediapipe/hands';
 import { drawCanvas } from '../util/drawCanvas';
 import EvaWebp from 'public/img/eva.webp';
-import { Box, Button, Image, Flex, HStack } from '@chakra-ui/react';
+import { Box, Button, Image, Flex, HStack, Spinner } from '@chakra-ui/react';
 import SNS from 'components/organism/SNS';
 
 // const Circle = css`
@@ -70,6 +70,7 @@ const MediaPipeComponent: FC = () => {
   const [captureUrl, setCaptureUrl] = useState<string>('');
   const [countdown, setCountdown] = useState<number>(3);
   const [isTimer, setIsTimer] = useState<boolean>(false);
+  const [isCamLoad, setIsCamLoad] = useState<boolean>(true);
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resultsRef = useRef<Results>();
@@ -83,6 +84,7 @@ const MediaPipeComponent: FC = () => {
    * @param results
    */
   const onResults = useCallback((results: Results) => {
+    if (isCamLoad) setIsCamLoad(false);
     resultsRef.current = results;
 
     const canvasCtx = canvasRef.current!.getContext('2d')!;
@@ -147,6 +149,7 @@ const MediaPipeComponent: FC = () => {
   const handleClearInterval = () => clearInterval(iv);
 
   const capture = useCallback((): void => {
+    console.log(webcamRef);
     const imageSrc = canvasRef.current?.toDataURL('image/jpeg', 0.85);
     if (imageSrc == undefined) throw new Error(t('Screenshot Error'));
     if (imageSrc) {
@@ -176,6 +179,17 @@ const MediaPipeComponent: FC = () => {
         />
         {/* draw */}
         <canvas ref={canvasRef} css={styles.canvas} width={1280} height={720} />
+        {isCamLoad && (
+          <Box
+            position="absolute"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            zIndex="1"
+            fontSize="48px">
+            <Spinner w="100px" h="100px" color="red.500" />
+          </Box>
+        )}
         <img id="Yari" src={EvaWebp.src} style={{ visibility: 'hidden' }} />
         {/* countdown */}
         {isTimer && countdown != 0 && (

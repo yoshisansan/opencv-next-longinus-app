@@ -19,7 +19,6 @@ type ShareButtonsProps = {
 };
 
 const SNS: FC<ShareButtonsProps> = ({ title, shareText, url, twitterId, hashtags }) => {
-  console.log();
   return (
     <>
       <TwitterShareButton
