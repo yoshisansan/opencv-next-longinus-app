@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
+import ThumbNail from 'public/img/thumbnail.jpg';
 
 // type ThumbNail = {
 //   url: string | undefined;
@@ -47,7 +48,7 @@ const SEO: FC<{
           type: pageType,
           images: [
             {
-              url: 'https://longinus.aminosan.app/img/thumbnail.jpg',
+              url: ThumbNail.src,
               width: 1200,
               height: 630,
               alt: `ロンギヌスの槍を投げ放題サイトのサムネイル画像`

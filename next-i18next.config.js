@@ -1,3 +1,5 @@
+require('dotenv').config({ path: '.env.development.local' });
+
 module.exports = {
   i18n: {
     defaultLocale: 'ja',
@@ -6,62 +8,62 @@ module.exports = {
   ns: ['common', 'manualTranslations'],
   domains: [
     {
-      domain: 'localhost:3000/en',
+      domain: 'https://longinus.aminosan.app/en',
       defaultLocale: 'en',
       http: true
     },
     {
-      domain: 'localhost:3000/de',
+      domain: 'https://longinus.aminosan.app/de',
       defaultLocale: 'de',
       http: true
     },
     {
-      domain: 'localhost:3000/es',
+      domain: 'https://longinus.aminosan.app/es',
       defaultLocale: 'es',
       http: true
     },
     {
-      domain: 'localhost:3000/id',
+      domain: 'https://longinus.aminosan.app/id',
       defaultLocale: 'id',
       http: true
     },
     {
-      domain: 'localhost:3000/et',
+      domain: 'https://longinus.aminosan.app/et',
       defaultLocale: 'et',
       http: true
     },
     {
-      domain: 'localhost:3000/tr',
+      domain: 'https://longinus.aminosan.app/tr',
       defaultLocale: 'tr',
       http: true
     },
     {
-      domain: 'localhost:3000/zh',
+      domain: 'https://longinus.aminosan.app/zh',
       defaultLocale: 'zh',
       http: true
     },
     {
-      domain: 'localhost:3000/jp',
+      domain: 'https://longinus.aminosan.app/jp',
       defaultLocale: 'ja',
       http: true
     },
     {
-      domain: 'localhost:3000/ru',
+      domain: 'https://longinus.aminosan.app/ru',
       defaultLocale: 'ru',
       http: true
     },
     {
-      domain: 'localhost:3000/fr',
+      domain: 'https://longinus.aminosan.app/fr',
       defaultLocale: 'fr',
       http: true
     },
     {
-      domain: 'localhost:3000/el',
+      domain: 'https://longinus.aminosan.app/el',
       defaultLocale: 'el',
       http: true
     },
     {
-      domain: 'localhost:3000/sv',
+      domain: 'https://longinus.aminosan.app/sv',
       defaultLocale: 'sv',
       http: true
     }
