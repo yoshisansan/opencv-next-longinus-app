@@ -15,9 +15,9 @@ const ParticlesComponent = () => {
     await loadFull(main);
   };
 
-  const particlesLoaded = async (container: any): Promise<void> => {
-    // console.log(container);
-  };
+  // const particlesLoaded = async (container: any): Promise<void> => {
+  //   console.log();
+  // };
 
   return (
     <Box h="200px" zIndex={-1}>
@@ -25,7 +25,7 @@ const ParticlesComponent = () => {
         id="tsparticles"
         css={tsParticle}
         init={particlesInit}
-        loaded={particlesLoaded}
+        // loaded={particlesLoaded}
         height="100px"
         options={{
           background: {
