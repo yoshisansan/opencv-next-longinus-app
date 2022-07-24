@@ -11,6 +11,10 @@ const ID_JSON = require('../../public/locales/id/manualTranslations.json');
 const TR_JSON = require('../../public/locales/tr/manualTranslations.json');
 const ZH_JSON = require('../../public/locales/zh/manualTranslations.json');
 const JA_JSON = require('../../public/locales/ja/manualTranslations.json');
+const RU_JSON = require('../../public/locales/ru/manualTranslations.json');
+const FR_JSON = require('../../public/locales/fr/manualTranslations.json');
+const EL_JSON = require('../../public/locales/el/manualTranslations.json');
+const SV_JSON = require('../../public/locales/sv/manualTranslations.json');
 const fs = require('fs');
 require('dotenv').config({ path: '.env.development.local' });
 
@@ -98,6 +102,30 @@ const options = {
       deeplKeyName: 'ZH',
       manualJSON: ZH_JSON,
       outputDir: 'public/locales/zh/common.json'
+    },
+    {
+      name: 'ru',
+      deeplKeyName: 'RU',
+      manualJSON: RU_JSON,
+      outputDir: 'public/locales/ru/common.json'
+    },
+    {
+      name: 'fr',
+      deeplKeyName: 'FR',
+      manualJSON: FR_JSON,
+      outputDir: 'public/locales/fr/common.json'
+    },
+    {
+      name: 'el',
+      deeplKeyName: 'EL',
+      manualJSON: EL_JSON,
+      outputDir: 'public/locales/el/common.json'
+    },
+    {
+      name: 'sv',
+      deeplKeyName: 'SV',
+      manualJSON: SV_JSON,
+      outputDir: 'public/locales/sv/common.json'
     }
   ]
 };

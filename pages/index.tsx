@@ -28,7 +28,7 @@ const Home = () => {
         display="table">
         <MediaPipeComponent />
       </Box>
-      <Flex w="100%" m="0 auto" mt="24px" maxW="1000px" bg="#fff" justify="center">
+      <Flex w="100%" m="0 auto" mt="24px" p="24px" maxW="1000px" bg="#fff" justify="center">
         <Box>
           <Heading
             transform={'scaleY(1.4)'}

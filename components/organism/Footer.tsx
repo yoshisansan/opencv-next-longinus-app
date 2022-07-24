@@ -17,7 +17,7 @@ const Footer = () => (
     alignItems="center"
     zIndex="10"
     position="absolute">
-    <Box color="#fff">Copyright © 2022- あきふみ All Rights Reserved.</Box>
+    <Box color="#fff">Copyright © 2022- あきふみ（Akifumi） All Rights Reserved.</Box>
   </Flex>
 );
 

@@ -235,7 +235,7 @@ const MediaPipeComponent: FC = () => {
               await capture();
               setCountdown(countSecounds);
             }}>
-            {captureUrl == '' ? '撮影する 📷' : '撮り直す 📷'}
+            {captureUrl == '' ? `${t('Take a photo')} 📷` : `${t('Retake a photo')} 📷`}
           </Button>
           <a download={`Longinus-${formatDate(new Date())}.jpg`} href={captureUrl}>
             <Button
@@ -244,7 +244,7 @@ const MediaPipeComponent: FC = () => {
                 if (captureUrl == '') return;
                 download();
               }}>
-              名前をつけて保存 💾
+              {t('Save a photo')} 💾
             </Button>
           </a>
         </Box>
@@ -254,6 +254,7 @@ const MediaPipeComponent: FC = () => {
             shareText={t('Share text')}
             url={url}
             twitterId={process.env.NEXT_PUBLIC_TWITTER_ID}
+            hashtags={[t('SpearOfLonginus')]}
           />
         </HStack>
       </Flex>

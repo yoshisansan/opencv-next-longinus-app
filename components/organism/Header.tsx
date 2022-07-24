@@ -4,7 +4,7 @@ import { Box, Flex, Text, Image } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import ParticlesComponent from 'components/util/ParticlesComponent';
 import GrandfatherPNG from 'public/img/grandfather.png';
-import { US, JP, CN, EE, ES, DE, TR, ID } from 'country-flag-icons/react/3x2';
+import { US, JP, CN, EE, ES, DE, TR, ID, RU, FR, GR, SE } from 'country-flag-icons/react/3x2';
 import i18n from 'i18next';
 
 const Header = () => {
@@ -26,19 +26,19 @@ const Header = () => {
             <US title="United States" />
           </Box>
         </a>
-        <a href={`${origin}`}>
+        <a href={`${origin}/jp`}>
           <Box cursor="pointer" m="4px" w="24px">
-            <JP title="Japanese" />
-          </Box>
-        </a>
-        <a href={`${origin}/et`}>
-          <Box onClick={() => router.replace(`${origin}/et`)} m="4px" w="24px">
-            <EE title="Estonia" />
+            <JP title="Japan" />
           </Box>
         </a>
         <a href={`${origin}/es`}>
           <Box m="4px" w="24px">
             <ES title="Spain" />
+          </Box>
+        </a>
+        <a href={`${origin}/et`}>
+          <Box onClick={() => router.replace(`${origin}/et`)} m="4px" w="24px">
+            <EE title="Estonia" />
           </Box>
         </a>
         <a href={`${origin}/de`}>
@@ -61,6 +61,26 @@ const Header = () => {
             <CN title="Chinese" />
           </Box>
         </a>
+        <a href={`${origin}/ru`}>
+          <Box m="4px" w="24px">
+            <RU title="Russia" />
+          </Box>
+        </a>
+        <a href={`${origin}/fr`}>
+          <Box m="4px" w="24px">
+            <FR title="France" />
+          </Box>
+        </a>
+        <a href={`${origin}/el`}>
+          <Box m="4px" w="24px">
+            <GR title="Greek" />
+          </Box>
+        </a>
+        <a href={`${origin}/sv`}>
+          <Box m="4px" w="24px">
+            <SE title="Sweden" />
+          </Box>
+        </a>
       </Flex>
       <Flex w="100%" h="300px" p="24px" justifyContent="center" alignItems="center">
         <Link href="/" passHref>
@@ -77,7 +97,11 @@ const Header = () => {
             {title}
           </Text>
         </Link>
-        <Image src={GrandfatherPNG.src} w="100px" />
+        <Image
+          src={GrandfatherPNG.src}
+          w="100px"
+          animation="fuwafuwa 5s infinite cubic-bezier(0.19,-0.19, 0.8, 1.43)"
+        />
         <ParticlesComponent />
       </Flex>
     </Box>
