@@ -20,22 +20,22 @@ const SEO: FC<{
   return (
     <>
       <Head>
-        {/* <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-      /> */}
-        {/* <script
-        dangerouslySetInnerHTML={{
-          __html: `
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
           page_path: window.location.pathname,
         });
-      `,
-        }}
-      /> */}
+      `
+          }}
+        />
       </Head>
       <NextSeo
         title={title}
@@ -47,7 +47,7 @@ const SEO: FC<{
           type: pageType,
           images: [
             {
-              url: 'https://nora-dev.com/images/nora-dev.png',
+              url: 'https://longinus.aminosan.app/img/thumbnail.jpg',
               width: 1200,
               height: 630,
               alt: `ロンギヌスの槍を投げ放題サイトのサムネイル画像`
@@ -56,7 +56,7 @@ const SEO: FC<{
           site_name: siteTitle
         }}
         twitter={{
-          site: '@akifumidev',
+          site: ' ',
           cardType: 'summary_large_image'
         }}
         additionalLinkTags={[
