@@ -6,6 +6,7 @@ Project Description
 
 ### Todo
 
+- [ ] webカメラのローディング中の表記  
 - [ ] DeepL翻訳がマニュアルにあるプロパティしか翻訳してくれない  
 
 ### In Progress

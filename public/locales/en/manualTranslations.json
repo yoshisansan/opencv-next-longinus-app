@@ -1,11 +1,12 @@
 {
+  "title": "The site where you can throw the Spear of Longinus as far as you want",
   "Screenshot Error": "Screenshot failed.",
   "Take a photo": "Take a photo",
   "Retake a photo": "Retake a photo",
   "Save a photo": "Save a photo",
-  "SpearOfLonginus": "SpearOfLonginus",
   "Share text": "Gather around if you like the Spear of Longinus! Now you can throw the spear as much as you want!",
-  "title": "The site where you can throw the Spear of Longinus as far as you want",
+  "SpearOfLonginus": "SpearOfLonginus",
   "how to use": "How To Use",
-  "how to use desc": "Play the thumb as if you were playing a coin toss. The trick is to separate the index finger and thumb at once."
+  "how to use desc": "Play the thumb as if you were playing a coin toss. The trick is to separate the index finger and thumb at once.",
+  "test": "hoge"
 }

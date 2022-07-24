@@ -3,6 +3,7 @@ module.exports = {
     defaultLocale: 'ja',
     locales: ['en', 'de', 'ja', 'zh', 'es', 'id', 'et', 'tr', 'ru', 'fr', 'el', 'sv']
   },
+  ns: ['common', 'manualTranslations'],
   domains: [
     {
       domain: 'localhost:3000/en',
@@ -64,5 +65,6 @@ module.exports = {
       defaultLocale: 'sv',
       http: true
     }
-  ]
+  ],
+  reloadOnPrerender: false // true にすると next dev モードのときにリロードするだけで JSON の更新が画面に反映されます
 };

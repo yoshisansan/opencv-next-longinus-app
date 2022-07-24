@@ -16,7 +16,7 @@ i18n
     },
     fallbackLng: ['en', 'se', 'da'],
     debug: true,
-    ns: ['translations'],
+    ns: ['manualTranslations', 'common'],
     defaultNS: 'translations',
     keySeparator: false,
     interpolation: {

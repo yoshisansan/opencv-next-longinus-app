@@ -1,8 +1,9 @@
-const { i18n } = require('./next-i18next.config');
-const withVideos = require('next-videos');
+const { i18n } = require('./next-i18next.config.js');
+// const withVideos = require('next-videos');
 
-module.exports = withVideos();
+// export withVideos();
 module.exports = {
+  experimental: { esmExternals: true },
   i18n,
   eslint: {
     dirs: ['pages', 'components', 'data/create', 'types'] // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)

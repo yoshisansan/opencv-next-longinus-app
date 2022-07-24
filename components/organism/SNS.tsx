@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Flex, Icon } from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/react';
 import {
   FacebookShareButton,
   HatenaShareButton,
@@ -15,13 +15,18 @@ type ShareButtonsProps = {
   shareText: string;
   url: string;
   twitterId: string | undefined;
+  hashtags: string[];
 };
 
-const SNS: FC<ShareButtonsProps> = ({ title, shareText, url, twitterId }) => {
+const SNS: FC<ShareButtonsProps> = ({ title, shareText, url, twitterId, hashtags }) => {
   console.log();
   return (
     <>
-      <TwitterShareButton url={url} title={`${shareText} - ${title}`} via={twitterId}>
+      <TwitterShareButton
+        url={url}
+        title={`${shareText} - ${title}`}
+        via={twitterId}
+        hashtags={hashtags}>
         <Icon as={FaTwitter} boxSize={8} fill="gray.400" _hover={{ fill: '#d03131' }} />
       </TwitterShareButton>
       <FacebookShareButton url={url}>

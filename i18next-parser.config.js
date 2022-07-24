@@ -6,14 +6,16 @@ module.exports = {
     default: ['JavascriptLexer']
   },
 
+  defaultNamespace: 'translation',
+
   locales: ['es', 'en', 'ja', 'zh', 'de', 'id', 'et', 'tr', 'ru', 'fr', 'el', 'sv'],
-  // An array of the locales in your applications
 
   namespaceSeparator: '.',
   // Namespace separator used in your translation keys
   // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t('Status: Loading...')` will not think that there are a namespace and three separator dots for instance.
 
-  output: 'public/locales/$LOCALE/$NAMESPACE.json',
+  output: 'public/locales/$LOCALE/manualTranslations.json',
+  // output: 'public/locales/$LOCALE/$NAMESPACE.json', // namespaceがなぜか効かない。commonとcommon_oldだけがoutputされる
   // Supports $LOCALE and $NAMESPACE injection
   // Supports JSON (.json) and YAML (.yml) file formats
   // Where to write the locale files relative to process.cwd()

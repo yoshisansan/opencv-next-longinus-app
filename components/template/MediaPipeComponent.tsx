@@ -11,44 +11,44 @@ import EvaWebp from 'public/img/eva.webp';
 import { Box, Button, Image, Flex, HStack } from '@chakra-ui/react';
 import SNS from 'components/organism/SNS';
 
-const Circle = css`
-  position: absolute;
-  top: 32px;
-  left: 48px;
-  width: 120px;
-  height: 120px;
-  background: #000;
-  border-radius: 50%;
-  text-align: center;
-  overflow: hidden;
-  z-index: 1;
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -60px;
-    width: 120px;
-    height: 120px;
-    background: #d3ba3e;
-    transform-origin: right 60px;
-    z-index: 2;
-    animation: rotateLeft 1040ms infinite linear;
-  }
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0px;
-    left: 60px;
-    width: 120px;
-    height: 120px;
-    background: #d3ba3e;
-    transform-origin: left 60px;
-    z-index: 3;
-    animation: rotateRight 1040ms infinite linear;
-  }
-`;
+// const Circle = css`
+//   position: absolute;
+//   top: 32px;
+//   left: 48px;
+//   width: 120px;
+//   height: 120px;
+//   background: #000;
+//   border-radius: 50%;
+//   text-align: center;
+//   overflow: hidden;
+//   z-index: 1;
+//   &::before {
+//     content: '';
+//     display: block;
+//     position: absolute;
+//     top: 0;
+//     left: -60px;
+//     width: 120px;
+//     height: 120px;
+//     background: #d3ba3e;
+//     transform-origin: right 60px;
+//     z-index: 2;
+//     animation: rotateLeft 1040ms infinite linear;
+//   }
+//   &::after {
+//     content: '';
+//     display: block;
+//     position: absolute;
+//     top: 0px;
+//     left: 60px;
+//     width: 120px;
+//     height: 120px;
+//     background: #d3ba3e;
+//     transform-origin: left 60px;
+//     z-index: 3;
+//     animation: rotateRight 1040ms infinite linear;
+//   }
+// `;
 
 const CircleInner = css`
   position: absolute;

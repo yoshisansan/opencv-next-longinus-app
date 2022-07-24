@@ -26,7 +26,7 @@ const Header = () => {
             <US title="United States" />
           </Box>
         </a>
-        <a href={`${origin}/jp`}>
+        <a href={`${origin}`}>
           <Box cursor="pointer" m="4px" w="24px">
             <JP title="Japan" />
           </Box>
