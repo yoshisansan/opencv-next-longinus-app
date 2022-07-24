@@ -48,7 +48,7 @@ const SEO: FC<{
           type: pageType,
           images: [
             {
-              url: ThumbNail.src,
+              url: `${process.env.NEXT_PUBLIC_HOST}/${ThumbNail.src}`,
               width: 1200,
               height: 630,
               alt: `ロンギヌスの槍を投げ放題サイトのサムネイル画像`
