@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import SEO from 'components/util/seo';
 import { Flex, Box, Text, Heading, AspectRatio } from '@chakra-ui/react';
@@ -8,6 +9,11 @@ import MediaPipeComponent from 'components/template/MediaPipeComponent';
 const Home = () => {
   const { t } = useTranslation('common');
   const videoRef = useRef<HTMLVideoElement>(null);
+  const origin =
+    typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
+  const { locale } = useRouter();
+  const url = `${origin}/${locale}`;
+
   useEffect(() => {
     setTimeout(() => {
       videoRef.current?.play();
@@ -17,7 +23,7 @@ const Home = () => {
   const titleStr = t('title');
   return (
     <>
-      <SEO title={`${titleStr}`} description={titleStr} url="" pageType="website" />
+      <SEO title={`${titleStr}`} description={titleStr} url={url} pageType="website" />
       <Box
         w="100vw"
         h="80px"
