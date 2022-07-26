@@ -1,9 +1,8 @@
-// import Head from 'next/head';
+import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 import ThumbNail from 'public/img/thumbnail.jpg';
-import Script from 'next/script';
 
 const SEO: FC<{
   title: string;
@@ -15,7 +14,7 @@ const SEO: FC<{
   const siteTitle = t('title');
   return (
     <>
-      {/* <Head>
+      <Head>
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
@@ -23,15 +22,15 @@ const SEO: FC<{
         <script
           dangerouslySetInnerHTML={{
             __html: `
-   window.dataLayer = window.dataLayer || [];
-   function gtag(){dataLayer.push(arguments);}
-   gtag('js', new Date());
-   gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { 'page_path': ${url}, 'send_page_view': true });
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { 'page_path': ${url}, 'send_page_view': true });
             `
           }}
         />
-      </Head> */}
-      <Script
+      </Head>
+      {/* <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
       />
@@ -42,7 +41,7 @@ const SEO: FC<{
             gtag('js', new Date());
             gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { 'page_path': ${url}, 'send_page_view': true });
           `}
-      </Script>
+      </Script> */}
       <NextSeo
         title={title}
         description={description}
