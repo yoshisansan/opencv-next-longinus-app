@@ -149,7 +149,6 @@ const MediaPipeComponent: FC = () => {
   const handleClearInterval = () => clearInterval(iv);
 
   const capture = useCallback((): void => {
-    console.log(webcamRef);
     const imageSrc = canvasRef.current?.toDataURL('image/jpeg', 0.85);
     if (imageSrc == undefined) throw new Error(t('Screenshot Error'));
     if (imageSrc) {

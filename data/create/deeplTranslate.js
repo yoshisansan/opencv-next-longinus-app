@@ -15,8 +15,11 @@ const RU_JSON = require('../../public/locales/ru/manualTranslations.json');
 const FR_JSON = require('../../public/locales/fr/manualTranslations.json');
 const EL_JSON = require('../../public/locales/el/manualTranslations.json');
 const SV_JSON = require('../../public/locales/sv/manualTranslations.json');
+
 const fs = require('fs');
 require('dotenv').config({ path: '.env.development.local' });
+
+
 
 const translate = async (baseLang, targetLang) => {
   const baseLangManualJSON = baseLang.manualJSON;

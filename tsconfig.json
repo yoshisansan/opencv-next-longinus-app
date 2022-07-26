@@ -24,10 +24,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "next.config.js",
+    "next.config.cjss",
     "lib/gtag.js",
     "data/create/sourceDataTreatment.js"
-  ],
+, "data/i18n-manual_translate.js"  ],
   "exclude": [
     "node_modules"
   ]
