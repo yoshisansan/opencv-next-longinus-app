@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 import ThumbNail from 'public/img/thumbnail.jpg';
+import Script from 'next/script';
 
 // type ThumbNail = {
 //   url: string | undefined;
@@ -21,20 +22,20 @@ const SEO: FC<{
   return (
     <>
       <Head>
-        {/* <script
-          async
+        <Script
+          strategy="lazyOnload"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-      `
-          }}
-        /> */}
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+              page_path: window.location.pathname,
+            });
+                `}
+        </Script>
       </Head>
       <NextSeo
         title={title}
