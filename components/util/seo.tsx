@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 import ThumbNail from 'public/img/thumbnail.jpg';
-import Script from 'next/script';
+// import Script from 'next/script';
 
 const SEO: FC<{
   title: string;
