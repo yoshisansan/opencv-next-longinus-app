@@ -1,4 +1,4 @@
-// import Head from 'next/head';
+import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
@@ -16,7 +16,24 @@ const SEO: FC<{
 
   return (
     <>
-      <Script
+      <Head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { 'send_page_view': true });
+            `
+          }}
+        />
+      </Head>
+      {/* <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
       />
@@ -29,7 +46,7 @@ const SEO: FC<{
               page_path: window.location.pathname,
             });
                 `}
-      </Script>
+      </Script> */}
       <NextSeo
         title={title}
         description={description}
