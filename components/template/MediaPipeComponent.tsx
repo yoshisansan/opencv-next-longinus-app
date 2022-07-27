@@ -77,6 +77,9 @@ const MediaPipeComponent: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resultsRef = useRef<Results>();
 
+  const canvasWidth =
+    typeof window !== 'undefined' && window.innerWidth < 1280 ? window.innerWidth : 1280;
+
   const { t } = useTranslation('common');
   const origin =
     typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
@@ -176,14 +179,14 @@ const MediaPipeComponent: FC = () => {
         <Webcam
           audio={false}
           style={{ visibility: 'hidden' }}
-          width={1280}
+          width={canvasWidth}
           height={720}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           videoConstraints={{ width: 1280, height: 720, facingMode: 'user' }}
         />
         {/* draw */}
-        <canvas ref={canvasRef} css={styles.canvas} />
+        <canvas ref={canvasRef} css={styles.canvas} width={canvasWidth} height={720} />
         {isCamLoad && (
           <Box
             position="absolute"
@@ -232,37 +235,37 @@ const MediaPipeComponent: FC = () => {
         justify="space-between"
         margin="0 auto"
         p="24px">
-        <Box mr="18px" lineHeight="60px">
-          <Button
-            mr="12px"
-            color={isTimer ? '#e0e0e0' : '#333'}
-            onClick={async () => {
-              if (captureUrl != '') {
-                setCaptureUrl('');
+        {!hasTouchScreen && (
+          <Box mr="18px" lineHeight="60px">
+            <Button
+              mr="12px"
+              color={isTimer ? '#e0e0e0' : '#333'}
+              onClick={async () => {
+                if (captureUrl != '') {
+                  setCaptureUrl('');
 
-                return;
-              }
-              if (isTimer == true) return; //// 連続クリックさせない
-              setIsTimer(true);
-              handleClearInterval();
-              // キャプチャのカウントダウン
-              const countSecounds = 3;
-              const capTimer = () =>
-                new Promise<void>((resolve) => {
-                  setCountdown(countSecounds);
-                  captureTimer(countSecounds);
-                  setTimeout(() => {
-                    resolve();
-                  }, countSecounds * 1000);
-                });
-              await capTimer();
-              setIsTimer(false);
-              await capture();
-              setCountdown(countSecounds);
-            }}>
-            {captureUrl == '' ? `${t('Take a photo')} 📷` : `${t('Retake a photo')} 📷`}
-          </Button>
-          {!hasTouchScreen && (
+                  return;
+                }
+                if (isTimer == true) return; //// 連続クリックさせない
+                setIsTimer(true);
+                handleClearInterval();
+                // キャプチャのカウントダウン
+                const countSecounds = 3;
+                const capTimer = () =>
+                  new Promise<void>((resolve) => {
+                    setCountdown(countSecounds);
+                    captureTimer(countSecounds);
+                    setTimeout(() => {
+                      resolve();
+                    }, countSecounds * 1000);
+                  });
+                await capTimer();
+                setIsTimer(false);
+                await capture();
+                setCountdown(countSecounds);
+              }}>
+              {captureUrl == '' ? `${t('Take a photo')} 📷` : `${t('Retake a photo')} 📷`}
+            </Button>
             <a download={`Longinus-${formatDate(new Date())}.jpg`} href={captureUrl}>
               <Button
                 color={captureUrl == '' ? '#e0e0e0' : '#333'}
@@ -273,8 +276,8 @@ const MediaPipeComponent: FC = () => {
                 {t('Save a photo')} 💾
               </Button>
             </a>
-          )}
-        </Box>
+          </Box>
+        )}
         <HStack spacing={2} lineHeight="12px">
           <SNS
             title={t('title')}
