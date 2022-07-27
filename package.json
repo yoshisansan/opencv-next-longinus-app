@@ -10,9 +10,7 @@
     "format": "prettier --write ./**/*.{js,jsx,ts,tsx} ./**/**/*.{js,jsx,ts,tsx} --config ./.prettierrc",
     "dataTrim": "node data/create/sourceDataTreatment",
     "extract-translations": "i18next",
-    "manual-extract": "i18next --output public/locales/de/manualTranslations.json",
-    "translate": "node data/create/deeplTranslate",
-    "hello": "ts-node data/i18n-manual_translate"
+    "translate": "node data/create/deeplTranslate"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.4",
