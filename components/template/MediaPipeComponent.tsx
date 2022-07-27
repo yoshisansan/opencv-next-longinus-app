@@ -279,10 +279,10 @@ const MediaPipeComponent: FC = () => {
           </Box>
         ) : (
           <Box p="8px">
-            <Text w="100%" display="block" color="#fff" fontSize="20px">
+            <Text w="100%" display="block" color="#fff" fontSize="18px">
               ※{t('Laptop use recommended')}
             </Text>
-            <Text w="100%" display="block" color="#fff" fontSize="20px">
+            <Text w="100%" display="block" color="#fff" fontSize="18px">
               ※{t('If you are using a smart phone, lay it down on its side')}
             </Text>
           </Box>

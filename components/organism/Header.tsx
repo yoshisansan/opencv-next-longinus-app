@@ -21,12 +21,16 @@ const Header = () => {
         alignItems={'center'}
         pl="12px"
         w="100%"
-        h={{ base: '80px', md: '40px' }}
+        h={{ base: '100px', sm: '80px', md: '40px' }}
         bg="#333">
         <Text m="4px" color="#fff">
           Choose a language :{' '}
         </Text>
-        <Flex justify="center" flexWrap="wrap">
+        <Flex
+          p={{ base: '0', sm: '10px 0' }}
+          justify="center"
+          flexWrap="wrap"
+          h={{ base: '60px', sm: '40px' }}>
           <a href={`${origin}/en`}>
             <Box onClick={() => i18n.changeLanguage('en')} cursor="pointer" m="4px" w="24px">
               <US title="United States" />
@@ -89,12 +93,7 @@ const Header = () => {
           </a>
         </Flex>
       </Flex>
-      <Flex
-        w="100%"
-        h={{ base: '360px', md: '300px' }}
-        p="24px"
-        justifyContent="center"
-        alignItems="center">
+      <Flex w="100%" h={{ base: '300px' }} p="24px" justifyContent="center" alignItems="center">
         <Link href="/" passHref>
           <Text
             transform={`scaleY(1.4)`}
