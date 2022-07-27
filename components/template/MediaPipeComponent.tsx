@@ -183,7 +183,7 @@ const MediaPipeComponent: FC = () => {
           videoConstraints={{ width: 1280, height: 720, facingMode: 'user' }}
         />
         {/* draw */}
-        <canvas ref={canvasRef} css={styles.canvas} width={1280} height={720} />
+        <canvas ref={canvasRef} css={styles.canvas} />
         {isCamLoad && (
           <Box
             position="absolute"
