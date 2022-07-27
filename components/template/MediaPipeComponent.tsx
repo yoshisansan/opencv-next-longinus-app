@@ -9,7 +9,7 @@ import { Hands, Results } from '@mediapipe/hands';
 import { drawCanvas } from '../util/drawCanvas';
 import { useHasTouchScreen } from 'components/util/touchScreen/screenHook';
 import EvaWebp from 'public/img/eva.webp';
-import { Box, Button, Image, Flex, HStack, Spinner } from '@chakra-ui/react';
+import { Box, Button, Image, Flex, HStack, Spinner, Text } from '@chakra-ui/react';
 import SNS from 'components/organism/SNS';
 
 // const Circle = css`
@@ -235,7 +235,7 @@ const MediaPipeComponent: FC = () => {
         justify="space-between"
         margin="0 auto"
         p="24px">
-        {!hasTouchScreen && (
+        {!hasTouchScreen ? (
           <Box mr="18px" lineHeight="60px">
             <Button
               mr="12px"
@@ -277,6 +277,10 @@ const MediaPipeComponent: FC = () => {
               </Button>
             </a>
           </Box>
+        ) : (
+          <Text color="#fff" fontSize="20px">
+            ※Laptop use recommended.
+          </Text>
         )}
         <HStack spacing={2} lineHeight="12px">
           <SNS
