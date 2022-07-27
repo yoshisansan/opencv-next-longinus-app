@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { ReactNode } from 'react'
-import Header from 'components/organism/Header'
-import Footer from 'components/organism/Footer'
+import { ReactNode } from 'react';
+import Header from 'components/organism/Header';
+import Footer from 'components/organism/Footer';
 import styled from '@emotion/styled';
 
 const Main = styled.main`
@@ -9,14 +9,12 @@ const Main = styled.main`
   width: 100%;
 `;
 
-const Layout = ({ children }: {children?: ReactNode}) => (
+const Layout = ({ children }: { children?: ReactNode }) => (
   <>
     <Header />
-    <Main>
-      {children}
-    </Main>
+    <Main>{children}</Main>
     <Footer />
   </>
-)
+);
 
-export default Layout
+export default Layout;
