@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 import { Camera } from '@mediapipe/camera_utils';
 import { Hands, Results } from '@mediapipe/hands';
 import { drawCanvas } from '../util/drawCanvas';
+import { useHasTouchScreen } from 'components/util/touchScreen/screenHook';
 import EvaWebp from 'public/img/eva.webp';
 import { Box, Button, Image, Flex, HStack, Spinner } from '@chakra-ui/react';
 import SNS from 'components/organism/SNS';
@@ -71,14 +72,19 @@ const MediaPipeComponent: FC = () => {
   const [countdown, setCountdown] = useState<number>(3);
   const [isTimer, setIsTimer] = useState<boolean>(false);
   const [isCamLoad, setIsCamLoad] = useState<boolean>(true);
+
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resultsRef = useRef<Results>();
+
   const { t } = useTranslation('common');
   const origin =
     typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
   const { locale } = useRouter();
   const url = `${origin}/${locale}`;
+
+  const { hasTouchScreen } = useHasTouchScreen();
+
   /**
    * 検出結果（フレーム毎に呼び出される）
    * @param results
@@ -165,7 +171,7 @@ const MediaPipeComponent: FC = () => {
 
   return (
     <>
-      <Box id="MediaPipe" css={styles.container}>
+      <Box id="MediaPipe" marginTop={{ base: '24px', sm: '8px' }} css={styles.container}>
         {/* capture */}
         <Webcam
           audio={false}
@@ -219,8 +225,14 @@ const MediaPipeComponent: FC = () => {
           </>
         )}
       </Box>
-      <Flex maxW="1280px" alignItems="center" justify="space-between" margin="0 auto" mt="20px">
-        <Box>
+      <Flex
+        maxW="1280px"
+        flexWrap="wrap"
+        alignItems="center"
+        justify="space-between"
+        margin="0 auto"
+        p="24px">
+        <Box mr="18px" lineHeight="60px">
           <Button
             mr="12px"
             color={isTimer ? '#e0e0e0' : '#333'}
@@ -250,18 +262,20 @@ const MediaPipeComponent: FC = () => {
             }}>
             {captureUrl == '' ? `${t('Take a photo')} 📷` : `${t('Retake a photo')} 📷`}
           </Button>
-          <a download={`Longinus-${formatDate(new Date())}.jpg`} href={captureUrl}>
-            <Button
-              color={captureUrl == '' ? '#e0e0e0' : '#333'}
-              onClick={() => {
-                if (captureUrl == '') return;
-                download();
-              }}>
-              {t('Save a photo')} 💾
-            </Button>
-          </a>
+          {!hasTouchScreen && (
+            <a download={`Longinus-${formatDate(new Date())}.jpg`} href={captureUrl}>
+              <Button
+                color={captureUrl == '' ? '#e0e0e0' : '#333'}
+                onClick={() => {
+                  if (captureUrl == '') return;
+                  download();
+                }}>
+                {t('Save a photo')} 💾
+              </Button>
+            </a>
+          )}
         </Box>
-        <HStack spacing={2}>
+        <HStack spacing={2} lineHeight="12px">
           <SNS
             title={t('title')}
             shareText={t('Share text')}

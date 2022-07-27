@@ -27,7 +27,7 @@ const Home = () => {
       <Box
         w="100vw"
         h="80px"
-        p="24px"
+        p={{ base: '12px 0', md: '24px' }}
         backgroundColor="#000"
         mr="calc(50% - 50vw)"
         ml="calc(50% - 50vw)"
